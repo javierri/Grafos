@@ -7,7 +7,7 @@ class Nodo:
 		self.arcos = []
 		
 	def enlace (self, destino, peso = 1):
-		if (type(nodo) == type(self)):
+		if (type(destino) == type(self)):
 			arco = Arco(destino, peso)
 			self.arcos.append(arco)
 			return True
