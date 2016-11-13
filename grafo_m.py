@@ -74,6 +74,6 @@ g.mostrar_nodos()
 print "arcos de A"
 g.mostrar_arcos("A")
 
-print "Eciste arco de A a B", g.existe_arco("A","B")
-print "Eciste arco de A a E", g.existe_arco("A","E")
+print "Existe arco de A a B", g.existe_arco("A","B")
+print "Existe arco de A a E", g.existe_arco("A","E")
 
