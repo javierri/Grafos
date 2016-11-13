@@ -1,3 +1,6 @@
+# Grafo - nodos enlazados -
+# Autor: Javier Rivera
+
 class Grafo:
 	def __init__(self):
 		self.__nodos = []
