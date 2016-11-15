@@ -5,7 +5,8 @@ class Grafo:
 	def __init__(self):
 		self.__nodos = []
 		self.__matriz = []
-		
+
+	# Busca la posicion de un nodo en el arreglo de nodos	
 	def buscaNodo(self,valor):
 		if (valor in self.__nodos):
 			return self.__nodos.index(valor)
@@ -26,12 +27,14 @@ class Grafo:
 			return True
 		return False
 		
+	# Muetra los valores (o informacion) de los nodos en el grafo 
 	def mostrar_nodos(self):
 		i = 0
 		for nodo in self.__nodos:
 			print i, nodo
 			i = i + 1
 			
+	# Muestra peso y nodo destino de los arcos (o aristas) de un nodo, dado su valor 
 	def mostrar_arcos(self, valor):
 		posOrigen = self.buscaNodo(valor)
 		if (posOrigen < 0):
@@ -39,10 +42,10 @@ class Grafo:
 			
 		for valDestino in self.__matriz[posOrigen]:
 			peso = self.__matriz[posOrigen][valDestino]
-			posDestino = self.buscaNodo(valDestino)
-			print self.__nodos[posDestino], peso
+			print valDestino, peso
 		return True
-			
+	
+	# Indica si existen arco (o arista) de un nodo origen a un nodo destino
 	def existe_arco(self,valOrigen, valDestino):
 		posOrigen = self.buscaNodo(valOrigen)
 		posDestino = self.buscaNodo(valDestino)
@@ -50,7 +53,8 @@ class Grafo:
 			if (valDestino in self.__matriz[posOrigen]):
 				return True
 		return False	
-
+	
+	# Elimina un nodo del grafo
 	def elimina_nodo (self, valOrigen):
 		posOrigen = self.buscaNodo(valOrigen)
 		del self.__nodos[posOrigen]
@@ -60,6 +64,7 @@ class Grafo:
 			if (valOrigen in arcos):
 				del arcos[valOrigen]
 				
+	# Indica si en un grafo hay nodos islas			
 	# No valida caso de nodo isla con enlace a si mismo
 	def existen_islas(self):
 		pos = 0
@@ -79,10 +84,12 @@ class Grafo:
 			
 			pos = pos + 1
 		return False
-		
+	
+	# Muestra la matriz de adyacencia almacenada del grafo	
 	def muestra_estructura_grafo(self):
 		print self.__nodos
 		print self.__matriz
+		
 		
 # PRINCIPAL
 	
