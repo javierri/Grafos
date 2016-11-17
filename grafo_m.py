@@ -64,8 +64,8 @@ class Grafo:
 			if (valOrigen in arcos):
 				del arcos[valOrigen]
 				
-	# Indica si en un grafo hay nodos islas			
-	# No valida caso de nodo isla con enlace a si mismo
+	# Indica si en un grafo hay nodos islas	
+	# valida nodo isla con enlace a si mismo
 	def existen_islas(self):
 		pos = 0
 		for arcos in self.__matriz:
