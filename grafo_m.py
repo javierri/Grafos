@@ -79,7 +79,7 @@ class Grafo:
 						esIsla = False	
 					posNodo = posNodo + 1 
 				
-				if (esIsla == True):
+				if (esIsla == True) or (self.existe_arco(valNodo,valNodo)):
 					return True
 			
 			pos = pos + 1
