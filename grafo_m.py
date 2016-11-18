@@ -85,6 +85,36 @@ class Grafo:
 			pos = pos + 1
 		return False
 	
+	# Indica si existe camino desde valOrigen a ValDestino en el grafo  
+	def existe_camino(self, valOrigen, valDestino):
+		
+		posOrigen = self.buscaNodo(valOrigen)
+		posDestino = self.buscaNodo(valDestino)
+		if (posOrigen < 0 or posOrigen < 0):
+			return False
+			
+		# inicializa atributo o crea si no existe
+		try:
+			self.__camino.append(valOrigen)
+		except AttributeError:
+			self.__camino = [valOrigen]
+		
+		# Verifica si existe enlace desde nodo origen a nodo destino
+		if (valDestino in self.__matriz[posOrigen]):
+			return True, self.__camino
+			
+		# Recorre los arcos de nodo origen para ver si hay camino a nodo destino	
+		for valNodo in self.__matriz[posOrigen]:
+			# Verifica si ya paso por ese nodo
+			if (valNodo in self.__camino):
+				continue
+			# busca camanio desde nodo del arco hacia nodo destino
+			if (self.existe_camino (valNodo, valDestino)):
+				return True, self.__camino
+			self.__camino.pop()
+					
+		return False
+	
 	# Muestra la matriz de adyacencia almacenada del grafo	
 	def muestra_estructura_grafo(self):
 		print self.__nodos
@@ -119,6 +149,9 @@ g.mostrar_arcos("A")
 
 print "Existe arco de A a B", g.existe_arco("A","B")
 print "Existe arco de A a E", g.existe_arco("A","E")
+
+print "Existe Camino de A a E", g.existe_camino("A","E")
+print "Existe Camino de B a E", g.existe_camino("B","E")
 
 print "Existen Islas", g.existen_islas()
 g.elimina_nodo("D")
