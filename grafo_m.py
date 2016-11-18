@@ -93,7 +93,7 @@ class Grafo:
 		if (posOrigen < 0 or posOrigen < 0):
 			return False
 			
-		# inicializa atributo o crea si no existe
+		# ingresa nodo origen a la lista camino o crea la lista si no existe con nodo inicial
 		try:
 			self.__camino.append(valOrigen)
 		except AttributeError:
@@ -108,7 +108,7 @@ class Grafo:
 			# Verifica si ya paso por ese nodo
 			if (valNodo in self.__camino):
 				continue
-			# busca camanio desde nodo del arco hacia nodo destino
+			# busca camino desde nodo del arco hacia nodo destino
 			if (self.existe_camino (valNodo, valDestino)):
 				return True, self.__camino
 			self.__camino.pop()
