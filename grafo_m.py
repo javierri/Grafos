@@ -90,7 +90,7 @@ class Grafo:
 		
 		posOrigen = self.buscaNodo(valOrigen)
 		posDestino = self.buscaNodo(valDestino)
-		if (posOrigen < 0 or posOrigen < 0):
+		if (posOrigen < 0 or posDestino < 0):
 			return False
 			
 		# ingresa nodo origen a la lista camino o crea la lista si no existe con nodo inicial
