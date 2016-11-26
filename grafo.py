@@ -99,6 +99,11 @@ class Grafo:
 				if (esIsla == True):
 					return True
 		return False
+	
+	def elimina_bucles(self):
+		for nodo in self.__nodos:
+			if nodo.existe_enlace(nodo):
+				nodo.eli_enlace(nodo)
 		
 	def __str__(self):
 		grafo  = ""
