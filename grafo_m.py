@@ -127,7 +127,7 @@ class Grafo:
 			posOrigen = posOrigen + 1
 			
 	# Elimina todos los bucles -enlaces a si mismo- del grafo
-	def elimina_buqle(self):
+	def elimina_bucle(self):
 		posOrigen = 0
 		for valOrigen in self.__nodos:
 			for valDestino in self.__matriz[posOrigen]:
