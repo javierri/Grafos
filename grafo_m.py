@@ -101,7 +101,7 @@ class Grafo:
 		
 		# Verifica si existe enlace desde nodo origen a nodo destino
 		if (valDestino in self.__matriz[posOrigen]):
-			return True, self.__camino
+			return True
 			
 		# Recorre los arcos de nodo origen para ver si hay camino a nodo destino	
 		for valNodo in self.__matriz[posOrigen]:
@@ -110,10 +110,33 @@ class Grafo:
 				continue
 			# busca camino desde nodo del arco hacia nodo destino
 			if (self.existe_camino (valNodo, valDestino)):
-				return True, self.__camino
+				return True
 			self.__camino.pop()
 					
 		return False
+	
+	# Convierte un grafo dirigido a un grafo no-dirigido, colocando en ambos sentidos todos los enlaces
+	def no_dirigido(self):
+		
+		posOrigen = 0
+		for valOrigen in self.__nodos:
+			for valDestino in self.__matriz[posOrigen]:
+				peso = self.__matriz[posOrigen][valDestino]
+				self.ins_arco(valDestino, valOrigen, peso)
+				
+			posOrigen = posOrigen + 1
+			
+	# Elimina todos los bucles -enlaces a si mismo- del grafo
+	def elimina_buqle(self):
+		posOrigen = 0
+		for valOrigen in self.__nodos:
+			for valDestino in self.__matriz[posOrigen]:
+				if (valOrigen == valDestino):
+					del self.__matriz[posOrigen][valDestino]
+					break
+				
+			posOrigen = posOrigen + 1
+		
 	
 	# Muestra la matriz de adyacencia almacenada del grafo	
 	def muestra_estructura_grafo(self):
