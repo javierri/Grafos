@@ -104,6 +104,28 @@ class Grafo:
 		for nodo in self.__nodos:
 			if nodo.existe_enlace(nodo):
 				nodo.eli_enlace(nodo)
+				
+	def existe_camino (self, valOrigen, valDestino, camino = []):
+		
+		nOrigen = self.buscaNodo(valOrigen)
+		nDestino = self.buscaNodo(valDestino)
+		if (nOrigen == False or nDestino == False):
+			return False
+		
+		camino.append(valOrigen)
+		if (nOrigen.existe_enlace(nDestino) != False):
+			camino.append(valDestino)
+			return True
+		
+		for arco in nOrigen.arcos:
+			if (arco.nodo.info in camino):
+				continue
+		
+			if (self.existe_camino (arco.nodo.info, valDestino, camino)):
+				return True
+			camino.pop()
+
+		return False
 		
 	def __str__(self):
 		grafo  = ""
@@ -117,58 +139,4 @@ class Grafo:
 			grafo = grafo + "(" + arcos + ") "
 		return grafo	
 					
-# Principal
 
-g = Grafo()
-nodo1 = g.ins_nodo("A")
-nodo2 = g.ins_nodo("B")
-nodo3 = g.ins_nodo("C")
-nodo4 = g.ins_nodo("D")
-
-nodo1.enlace(nodo2,2)
-nodo1.enlace(nodo3,1)
-nodo2.enlace(nodo4,1)
-
-print " GRAFO "
-print g 
-
-print "Enlaces de A"
-nodo1.muestra_enlaces()
-print "Enlaces de B"
-nodo2.muestra_enlaces()
-
-####### xxx #######
-
-g2 = Grafo(False)
-				
-g2.ins_nodo("A")
-g2.ins_nodo("B")
-g2.ins_nodo("C")
-g2.ins_nodo("D")
-g2.ins_nodo("E")
-
-g2.enlace("A","B",2)
-g2.enlace("A","C",1)
-g2.enlace("B","D",1)
-g2.enlace("D","E",1)
-
-print		
-print " GRAFO 2"
-
-print g2
-		
-print "Enlaces de A"
-nodoA = g2.buscaNodo("A")
-nodoA.muestra_enlaces()
-
-print "Enlaces de B"
-nodoB = g2.buscaNodo("B")
-nodoB.muestra_enlaces()
-		
-print "Islas..", g2.existen_islas()
-
-g2.eli_nodo("D")	
-
-print "Islas..", g2.existen_islas()
-
-print g2
