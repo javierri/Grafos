@@ -126,6 +126,63 @@ class Grafo:
 			camino.pop()
 
 		return False
+	
+	def sub_grafo (self, *valores):
+		sg = Grafo()
+		
+		for valOrigen in valores:
+			nOrigen = self.buscaNodo (valOrigen)
+			if (nOrigen != False):
+				sg.ins_nodo(nOrigen.info)
+
+		for valOrigen in valores:
+			nOrigen = self.buscaNodo (valOrigen)
+			if (nOrigen == False):
+				continue
+				
+			for arco in nOrigen.arcos:
+				if (arco.nodo.info in valores):
+					sg.enlace(nOrigen.info,arco.nodo.info)
+	
+		return sg
+		
+	def arco_mayor_camino (self, valOrigen, valDestino, camino = [], mayor = None):
+		
+		nOrigen = self.buscaNodo(valOrigen)
+		nDestino = self.buscaNodo(valDestino)
+		if (nOrigen == False or nDestino == False):
+			return False
+		
+		if (len(camino) == 0):
+			mayor = Arco()
+		
+		print valOrigen
+		camino.append(valOrigen)
+		
+		arco = nOrigen.existe_enlace(nDestino)
+		if (arco):
+			camino.append(valDestino)
+			if (arco.peso > mayor.peso):
+				mayor = arco
+				print mayor.peso	
+			
+			pos = camino.index(mayor.nodo.info)	
+			return True, camino[pos-1], mayor.nodo.info
+		
+		for arco in nOrigen.arcos:
+			if (arco.nodo.info in camino):
+				continue
+		
+			if (arco.peso > mayor.peso):
+				mayor = arco
+				print mayor.peso	
+		
+			enc, vi, vf = self.arco_mayor_camino (arco.nodo.info, valDestino, camino, mayor)
+			if (enc == True):
+				return True, vi, vf
+			camino.pop()
+
+		return False, None, None
 		
 	def __str__(self):
 		grafo  = ""
