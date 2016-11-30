@@ -156,18 +156,15 @@ class Grafo:
 		if (len(camino) == 0):
 			mayor = Arco()
 		
-		print valOrigen
 		camino.append(valOrigen)
-		
 		arco = nOrigen.existe_enlace(nDestino)
 		if (arco):
 			camino.append(valDestino)
 			if (arco.peso > mayor.peso):
 				mayor = arco
-				print mayor.peso	
 			
-			pos = camino.index(mayor.nodo.info)	
-			return True, camino[pos-1], mayor.nodo.info
+			pos = camino.index(mayor.nodo.info) - 1	
+			return True, camino[pos], mayor.nodo.info
 		
 		for arco in nOrigen.arcos:
 			if (arco.nodo.info in camino):
@@ -175,7 +172,6 @@ class Grafo:
 		
 			if (arco.peso > mayor.peso):
 				mayor = arco
-				print mayor.peso	
 		
 			enc, vi, vf = self.arco_mayor_camino (arco.nodo.info, valDestino, camino, mayor)
 			if (enc == True):
